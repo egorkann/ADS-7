@@ -4,7 +4,7 @@
 #include <chrono>
 #include <random>
 #include <fstream>
-#include <string>  
+#include <string>
 
 #include "train.h"
 
@@ -28,7 +28,7 @@ void runExperiment(int maxN, const std::string& mode,
     }
 
     auto start = std::chrono::high_resolution_clock::now();
-    int length = train.getLength();
+    train.getLength();  
     auto end = std::chrono::high_resolution_clock::now();
 
     std::chrono::duration<double> elapsed = end - start;
