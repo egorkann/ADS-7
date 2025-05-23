@@ -1,46 +1,49 @@
 // Copyright 2025 NNTU-CS
-#include "../include/train.h"
+#include "train.h"
+
+#include <chrono>
 #include <iostream>
 #include <random>
-#include <chrono>
+#include <string>
 #include <vector>
 
-void runExperiment(int n, const std::string& caseType) {
-    Train train;
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::bernoulli_distribution dist(0.5);
+using namespace std;
 
-    for (int i = 0; i < n; ++i) {
-        if (caseType == "on") {
-            train.addCar(true);
-        } else if (caseType == "off") {
-            train.addCar(false);
-        } else {
-            train.addCar(dist(gen));
-        }
+void runExperiment(int n, const string& mode) {
+  Train train;
+  random_device rd;
+  mt19937 gen(rd());
+  uniform_int_distribution<> dis(0, 1);
+
+  for (int i = 0; i < n; ++i) {
+    if (mode == "on") {
+      train.addCar(true);
+    } else if (mode == "off") {
+      train.addCar(false);
+    } else {  // random
+      train.addCar(dis(gen));
     }
+  }
 
-    auto start = std::chrono::high_resolution_clock::now();
-    int len = train.getLength();
-    auto end = std::chrono::high_resolution_clock::now();
+  auto start = chrono::high_resolution_clock::now();
+  int length = train.getLength();
+  auto end = chrono::high_resolution_clock::now();
 
-    std::chrono::duration<double> duration = end - start;
+  chrono::duration<double> duration = end - start;
 
-    std::cout << "Type: " << caseType
-              << ", Length: " << len
-              << ", Steps: " << train.getOpCount()
-              << ", Time: " << duration.count() << "s\n";
+  cout << "Mode: " << mode << ", n = " << n
+       << ", ops = " << train.getOpCount()
+       << ", time = " << duration.count() << " s, length = " << length << endl;
 }
 
 int main() {
-    std::vector<int> sizes = {10, 100, 500, 1000};
+  vector<int> sizes = {2, 4, 8, 16, 32, 64, 128, 256, 512, 1000};
 
-    for (int n : sizes) {
-        runExperiment(n, "off");
-        runExperiment(n, "on");
-        runExperiment(n, "rand");
-    }
+  for (int n : sizes) {
+    runExperiment(n, "off");
+    runExperiment(n, "on");
+    runExperiment(n, "random");
+  }
 
-    return 0;
+  return 0;
 }
