@@ -6,23 +6,22 @@ class Train {
  public:
   Train();
   ~Train();
-
   void addCar(bool light);
-  int getLength() const;
   int countLightsOn() const;
+  int getLength() const;
+  int getOpCount() const;
 
  private:
   struct Car {
-    bool light;
+    bool lightOn;
     Car* next;
-    Car* prev;
-
-    explicit Car(bool l) : light(l), next(nullptr), prev(nullptr) {}
+    Car(bool light) : lightOn(light), next(nullptr) {}
   };
 
   Car* head_;
   Car* tail_;
   int length_;
+  mutable int opCount_;
 };
 
 #endif  // INCLUDE_TRAIN_H_
