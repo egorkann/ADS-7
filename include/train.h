@@ -8,10 +8,13 @@ class Train {
     bool light;
     Car* next;
     Car* prev;
+
+    explicit Car(bool light_state = false)
+        : light(light_state), next(nullptr), prev(nullptr) {}
   };
 
-  Car* first;
   int countOp;
+  Car* first;
 
  public:
   Train();
@@ -20,9 +23,6 @@ class Train {
   void addCar(bool light);
   int getLength();
   int getOpCount();
-
- private:
-  Car* createCar(bool light);
 };
 
 #endif  // INCLUDE_TRAIN_H_
