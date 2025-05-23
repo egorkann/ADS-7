@@ -1,15 +1,15 @@
 // Copyright 2025 NNTU-CS
-#include "../include/train.h"
+#include "train.h"
 
-Train::Train() : first(nullptr), countOp(0) {}
+Train::Train() : countOp(0), first(nullptr) {}
 
 Train::~Train() {
   if (!first) return;
   Car* curr = first->next;
   while (curr != first) {
-    Car* temp = curr;
-    curr = curr->next;
-    delete temp;
+    Car* next = curr->next;
+    delete curr;
+    curr = next;
   }
   delete first;
 }
@@ -30,15 +30,29 @@ void Train::addCar(bool light) {
 }
 
 int Train::getLength() {
-  if (!first) return 0;
-  int length = 0;
   Car* curr = first;
-  do {
-    ++length;
-    ++countOp;
-    curr = curr->next;
-  } while (curr != first);
-  return length;
+  curr->light = true;
+  countOp++;
+
+  while (true) {
+    Car* runner = curr->next;
+    countOp++;
+    int steps = 1;
+
+    while (!runner->light) {
+      runner = runner->next;
+      steps++;
+      countOp++;
+    }
+
+    if (runner == curr) {
+      return steps;
+    }
+
+    curr->light = false;
+    curr = runner;
+    countOp++;
+  }
 }
 
 int Train::getOpCount() {
