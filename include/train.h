@@ -3,26 +3,26 @@
 #define INCLUDE_TRAIN_H_
 
 class Train {
+ public:
+  Train();
+  ~Train();
+
+  void addCar(bool light);
+  int getLength() const;
+  int countLightsOn() const;
+
  private:
   struct Car {
     bool light;
     Car* next;
     Car* prev;
 
-    explicit Car(bool light_state = false)
-        : light(light_state), next(nullptr), prev(nullptr) {}
+    explicit Car(bool l) : light(l), next(nullptr), prev(nullptr) {}
   };
 
-  int countOp;
-  Car* first;
-
- public:
-  Train();
-  ~Train();
-
-  void addCar(bool light);
-  int getLength();
-  int getOpCount();
+  Car* head_;
+  Car* tail_;
+  int length_;
 };
 
 #endif  // INCLUDE_TRAIN_H_
