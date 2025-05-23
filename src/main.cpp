@@ -3,9 +3,6 @@
 
 #include <iostream>
 #include <string>
-#include <vector>
-#include <algorithm>
-#include <cstdlib>
 
 int main() {
   Train train;
@@ -13,8 +10,9 @@ int main() {
   train.addCar(false);
   train.addCar(true);
 
-  std::cout << "Length: " << train.getLength() << std::endl;
-  std::cout << "Lights On: " << train.countLightsOn() << std::endl;
+  std::cout << "Train length: " << train.getLength() << std::endl;
+  std::cout << "Lights on: " << train.countLightsOn() << std::endl;
+  std::cout << "Operations: " << train.getOpCount() << std::endl;
 
   return 0;
 }
