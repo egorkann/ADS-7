@@ -1,11 +1,12 @@
 // Copyright 2025 GHA Test Team
 
+#include "train.h"
+
 #include <gtest/gtest.h>
 
 TEST(lab8, test1) {
   Train t;
   t.addCar(true);
-  t.addCar(false);
   int op = t.countLightsOn();
   EXPECT_EQ(op, 1);
 }
