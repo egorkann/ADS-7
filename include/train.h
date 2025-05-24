@@ -1,6 +1,6 @@
 // Copyright 2025 NNTU-CS
-#ifndef TRAIN_H_
-#define TRAIN_H_
+#ifndef INCLUDE_TRAIN_H_
+#define INCLUDE_TRAIN_H_
 
 #include <vector>
 
@@ -18,4 +18,4 @@ class Train {
   mutable int op_count_;
 };
 
-#endif  // TRAIN_H_
+#endif  // INCLUDE_TRAIN_H_
