@@ -1,18 +1,15 @@
 // Copyright 2025 NNTU-CS
-#include "train.h"
-
 #include <iostream>
-#include <string>
+#include "train.h"
 
 int main() {
   Train train;
   train.addCar(true);
   train.addCar(false);
-  train.addCar(true);
 
-  std::cout << "Train length: " << train.getLength() << std::endl;
-  std::cout << "Lights on: " << train.countLightsOn() << std::endl;
-  std::cout << "Operations: " << train.getOpCount() << std::endl;
+  std::cout << "Length: " << train.getLength() << '\n';
+  std::cout << "Lights on: " << train.countLightsOn() << '\n';
+  std::cout << "Operations: " << train.getOpCount() << '\n';
 
   return 0;
 }
